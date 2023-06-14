@@ -15,8 +15,8 @@ def upload_gd(db_backup, logfile):
     scopes = ['https://www.googleapis.com/auth/drive']
 
     # Auth credentials
-    client_secrets_file = GoogleDrive.client_secret_file
-    token_pickle_file = GoogleDrive.token_pickle_file
+    client_secrets_file = GoogleDrive.rpi_client_secret_file
+    token_pickle_file = GoogleDrive.rpi_token_pickle_file
 
     # Load or create the token.pickle file
     print("Authenticating ...")
