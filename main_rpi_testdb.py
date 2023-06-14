@@ -16,7 +16,7 @@ execution_date = datetime.today().strftime("%d/%m/%Y - %H:%M")
 
 date_name = datetime.today().strftime("%y%m%d")
 db_backup_file = "/home/admin/Python_scripts/HM_test/db_backups/test_hm_backup.sql"   ### change to directory path ###
-log_file = "C/home/admin/Python_scripts/HM_test/log/test_hm_log.txt"   ### change to directory path ###
+log_file = "/home/admin/Python_scripts/HM_test/log/test_hm_log.txt"   ### change to directory path ###
 
 
 if __name__ == "__main__":
