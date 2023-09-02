@@ -1,6 +1,5 @@
 import asyncio
 from telegram import Bot
-from classes.cloud_info import Telegram
 
 
 def send_log_tg(message, logfile, chatid, apikey):
@@ -25,10 +24,3 @@ def send_log_tg(message, logfile, chatid, apikey):
     loop.run_until_complete(send_message_and_file())
 
     print("Sending TG notification complete.")
-
-# api_key = Telegram.api_key
-# chat_id = Telegram.chat_id
-# log_file = r"C:\Users\Nils\Documents\Projects\Housing_Market\log\hm_log.txt"
-# log_file2 = ""
-#
-# send_log_tg('Test', log_file2, Telegram.chat_id, Telegram.api_key)

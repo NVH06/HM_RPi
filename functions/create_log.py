@@ -1,6 +1,6 @@
 import mysql.connector as database
 from datetime import datetime
-from classes.database_info import RpiHost, RpiHostTest, LocalHost
+from classes.database_info_local import RpiHost, RpiHostTest
 from classes.html_identifiers import LocationId
 
 
@@ -57,8 +57,3 @@ def log(logfile, host_class, zipcodes, pre_filter_count, total_count, sale_count
     # Close the connection
     connection.close()
     print("Log file complete.")
-
-# date_name = datetime.today().strftime("%y%m%d")
-# log_file = fr"C:\Users\Nils\Documents\Projects\Housing_Market\log\hm_log.txt"
-#
-# log(log_file, RpiHostTest)

@@ -15,8 +15,8 @@ def upload_gd(db_backup, logfile):
     scopes = ['https://www.googleapis.com/auth/drive']
 
     # Auth credentials
-    client_secrets_file = GoogleDrive.rpi_client_secret_file
-    token_pickle_file = GoogleDrive.rpi_token_pickle_file
+    client_secrets_file = GoogleDrive.local_client_secret_file
+    token_pickle_file = GoogleDrive.local_token_pickle_file
 
     # Load or create the token.pickle file
     print("Authenticating ...")
@@ -107,7 +107,7 @@ def upload_gd(db_backup, logfile):
 
     print("Upload completed.")
 
-# db_backup_file = r"C:\Users\Nils\Documents\Projects\Housing_Market\hm_backup\backup_test.txt"   ### change to directory path ###
-# log_file = r"C:\Users\Nils\Documents\Projects\Housing_Market\log\hm_log.txt"   ### change to directory path ###
-#
-# upload_gd(db_backup_file, log_file)
+db_backup_file = r"C:\Users\Nils\Documents\Projects\Housing_Market\hm_backup\backup_test.txt"   ### change to directory path ###
+log_file = r"C:\Users\Nils\Documents\Projects\Housing_Market\log\hm_log.txt"   ### change to directory path ###
+
+upload_gd(db_backup_file, log_file)

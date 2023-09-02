@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from classes.database_info import RpiHost, RpiHostTest, LocalHost
+
 
 def import_data(loc_table, fin_table, prop_table, host_class):
     print("\n-- MYSQL INSERT FUNCTION INITIATED --")
@@ -24,16 +24,3 @@ def import_data(loc_table, fin_table, prop_table, host_class):
     prop_table.to_sql('property', engine, if_exists='append', index=False)
 
     print("Mysql insert completed.")
-
-
-# ref_list = ["10086263", "10146505", "10232511"]
-# prop_type_list = ["HOUSE", "HOUSE", "APARTMENT"]
-# trans_type_list = ["for-sale", "for-sale", "for-sale"]
-# town_list = ["kontich", "puurs", "Liezele"]
-# zip_code_list = ["2550", "2870", "2870"]
-#
-# location_table, financial_table, property_table = \
-#         get_data(ref_list, town_list, zip_code_list, trans_type_list, prop_type_list)
-#
-# df_list = [location_table]
-# import_data(df_list)

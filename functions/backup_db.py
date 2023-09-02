@@ -1,5 +1,5 @@
 import paramiko
-from classes.database_info import RpiHost, RpiHostTest, SshInfo
+from classes.database_info_local import RpiHost, RpiHostTest, SshInfo
 
 
 def database_backup(output_file):
