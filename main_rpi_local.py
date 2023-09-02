@@ -6,7 +6,7 @@ from functions.create_log import log
 from functions.log_tg import send_log_tg
 from functions.gd_upload import upload_gd
 from classes.types import TransType
-from classes.database_info_local import RpiHost, RpiHostTest
+from classes.database_info_rpi import RpiHost, RpiHostTest
 from classes.cloud_info import Telegram
 from datetime import datetime
 

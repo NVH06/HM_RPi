@@ -1,6 +1,5 @@
 import mysql.connector as database
 from datetime import datetime
-from classes.database_info_local import RpiHost, RpiHostTest
 from classes.html_identifiers import LocationId
 
 
