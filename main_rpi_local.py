@@ -4,7 +4,7 @@ from functions.mysql_insert import import_data
 from functions.backup_db import database_backup
 from functions.create_log import log
 from functions.log_tg import send_log_tg
-from functions.gd_upload import upload_gd
+# from functions.gd_upload import upload_gd
 from classes.types import TransType
 from classes.database_info_rpi import RpiHost, RpiHostTest
 from classes.cloud_info import Telegram
