@@ -2,13 +2,13 @@ from functions.id_scrape import get_ids
 from functions.data_scrape import get_data
 from functions.mysql_insert import import_data
 from functions.backup_db import database_backup
-from functions.create_log import log
-from functions.log_tg import send_log_tg
+from functions.log import log_scrape, log_tg, log_timer, start_tg
 # from functions.gd_upload import upload_gd
 from classes.types import TransType
 from classes.database_info_rpi import RpiHost, RpiHostTest
 from classes.cloud_info import Telegram
 from datetime import datetime
+import time
 
 zip_codes = "2870,2630,2550"
 execution_date = datetime.today().strftime("%d/%m/%Y - %H:%M")
@@ -19,6 +19,10 @@ log_file = f"/home/admin/Python_scripts/HM/log/{date_name[:4]}_hm_log.txt"
 
 
 if __name__ == "__main__":
+
+    # Start
+    start = time.time()
+    start_tg(Telegram.chat_id, Telegram.api_key)
 
     try:
 
@@ -54,17 +58,21 @@ if __name__ == "__main__":
         database_backup(db_backup_file)
 
         # LOG FILE
-        log(log_file, RpiHostTest, zip_codes, pre_filter_count, total_count, sale_count, rent_count, med_buy, med_rent)
+        log_scrape(log_file, RpiHostTest, zip_codes, pre_filter_count, total_count, sale_count, rent_count, med_buy, med_rent)
 
         # UPLOAD BACKUP AND LOG FILE TO GD
         # upload_gd(db_backup_file, log_file)
 
+        # TIMER
+        execution_time = log_timer(start)
+
         # TELEGRAM NOTIFICATION
-        tg_msg = f'{execution_date}\nHM script execution SUCCESS.'
+        tg_msg = f'HM script execution SUCCESS.\nExecution time: {execution_time}'
 
     except Exception as e:
         err_msg = e
-        tg_msg = f'{execution_date}\nHM script execution FAILED.\nError:\n{err_msg}'
+        execution_time = log_timer(start)
+        tg_msg = f'HM script execution FAILED.\nExecution time: {execution_time}\nError:\n{err_msg}'
         log_file = ""
 
-    send_log_tg(tg_msg, log_file, Telegram.chat_id, Telegram.api_key)
+    log_tg(tg_msg, log_file, Telegram.chat_id, Telegram.api_key)
