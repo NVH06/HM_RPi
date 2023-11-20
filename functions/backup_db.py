@@ -16,7 +16,7 @@ def database_backup(output_file):
 
         # Construct the mysqldump command
         print("Creating backup file ...")
-        mysqldump_command = f'mysqldump --host={RpiHostTest.host} --user={RpiHostTest.user} --password={RpiHostTest.pwd} {RpiHostTest.database}'
+        mysqldump_command = f'mysqldump --host={RpiHost.host} --user={RpiHost.user} --password={RpiHost.pwd} {RpiHost.database}'
 
         # Execute the mysqldump command remotely
         _, stdout, _ = ssh_client.exec_command(mysqldump_command)
