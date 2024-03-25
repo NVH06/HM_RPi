@@ -1,6 +1,7 @@
 import requests
 from classes.types import PropType
 
+
 def get_ids(zip_code_list, trans_type_list):
     print("-- ID SCRAPE FUNCTION INITIATED --")
 
@@ -16,7 +17,9 @@ def get_ids(zip_code_list, trans_type_list):
     for trans_type in trans_type_list:
         for page in range(1, pages):
             URL = f"https://www.immoweb.be/nl/zoeken/huis-en-appartement/{trans_type}?countries=BE&isALifeAnnuitySale=false&isAPublicSale=false&isNewlyBuilt=false&postalCodes={zip_code_list}&page={page}&orderBy=relevance"
-            page = requests.get(URL)
+            headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                                     'Chrome/75.0.3770.142 Safari/537.36'}
+            page = requests.get(URL, headers=headers)
             fulltext = page.text
 
             textbegin = fulltext.find("<iw-search")

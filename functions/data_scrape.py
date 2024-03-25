@@ -7,6 +7,7 @@ from classes.types import TransType, PropType
 from classes.tables import LocationTable, FinancialTable, PropertyTable
 from classes.html_identifiers import LocationId, FinancialId, PropertyId
 
+
 def get_data(refs, zip_codes, regions, trans_types, prop_subtypes):
     print("\n-- DATA SCRAPING FUNCTION INITIATED --")
 
@@ -48,7 +49,9 @@ def get_data(refs, zip_codes, regions, trans_types, prop_subtypes):
     print("Scraping data...")
     for prop_subtype, region, zip_code, ref in zip(prop_subtypes, regions, zip_codes, refs):
         URL = f"https://www.immoweb.be/nl/zoekertje/{ref}"
-        page = requests.get(URL)
+        headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                                 'Chrome/75.0.3770.142 Safari/537.36'}
+        page = requests.get(URL, headers=headers)
         fulltext = page.text
 
         data_textbegin = fulltext.find('"bedroomCount"')

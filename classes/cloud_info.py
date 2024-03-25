@@ -2,6 +2,7 @@ class Telegram:
     chat_id = "2120652952"
     api_key = "6217335122:AAERAqOMMJlK00Yt2vd4QZMYV21IANp5Df4"
 
+
 class GoogleDrive:
     rpi_client_secret_file = "/home/admin/Python_scripts/HM/GoogleDrive/client_secrets.json"
     rpi_service_acc_secret_file = "/home/admin/Python_scripts/HM/GoogleDrive/service_acc_secrets.json"
