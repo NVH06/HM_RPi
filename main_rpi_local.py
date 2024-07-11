@@ -14,8 +14,8 @@ zip_codes = "2870,2630,2550"
 execution_date = datetime.today().strftime("%d/%m/%Y - %H:%M")
 
 date_name = datetime.today().strftime("%y%m%d")
-db_backup_file = f"/home/admin/Python_scripts/HM/db_backups/{date_name}_hm_backup.sql"
-log_file = f"/home/admin/Python_scripts/HM/log/{date_name[:4]}_hm_log.txt"
+db_backup_file = f"/home/admin/Documents/scripts/HM/db_backups/{date_name}_hm_backup.sql"
+log_file = f"/home/admin/Documents/scripts/HM/log/{date_name[:4]}_hm_log.txt"
 
 
 if __name__ == "__main__":
@@ -59,9 +59,6 @@ if __name__ == "__main__":
 
         # LOG FILE
         log_scrape(log_file, RpiHost, zip_codes, pre_filter_count, total_count, sale_count, rent_count, med_buy, med_rent)
-
-        # UPLOAD BACKUP AND LOG FILE TO GD
-        # upload_gd(db_backup_file, log_file)
 
         # TIMER
         execution_time = log_timer(start)
