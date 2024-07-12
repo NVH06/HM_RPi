@@ -1,5 +1,6 @@
 import paramiko
 from classes.database_info_rpi import RpiHost, RpiHostTest, SshInfo
+# from classes.database_info_local import RpiHost, RpiHostTest, SshInfo
 
 
 def database_backup(output_file):
@@ -14,18 +15,33 @@ def database_backup(output_file):
         print("Initiating SSH connection ...")
         ssh_client.connect(SshInfo.host, username=SshInfo.user, password=SshInfo.pwd)
 
-        # Construct the mysqldump command
+        # Identify the Docker container running MySQL
+        print("Identifying Docker container running MySQL ...")
+        stdin, stdout, stderr = ssh_client.exec_command('docker ps --filter "ancestor=mysql" --format "{{.ID}}"')
+        container_id = stdout.read().decode().strip()
+
+        if not container_id:
+            print("MySQL Docker container not found.")
+            print("DB backup aborted.")
+            return
+
+        # Construct the mysqldump command to be run inside the Docker container
         print("Creating backup file ...")
-        mysqldump_command = f'mysqldump --host={RpiHost.host} --user={RpiHost.user} --password={RpiHost.pwd} {RpiHost.database}'
+        mysqldump_command = (
+            f'docker exec {container_id} '
+            f'mysqldump --user={RpiHost.user} --password={RpiHost.pwd} {RpiHost.database}'
+        )
 
         # Execute the mysqldump command remotely
         _, stdout, _ = ssh_client.exec_command(mysqldump_command)
 
         # Save the output to a file locally
         with open(output_file, 'w') as file:
-            file.write(stdout.read().decode())
+            backup_data = stdout.read().decode()
+            file.write(backup_data)
 
         print("Backup completed.")
+
     except paramiko.AuthenticationException as e:
         print('Authentication failed. Please check your SSH credentials: ', e)
     except paramiko.SSHException as e:
