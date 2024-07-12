@@ -1,9 +1,39 @@
 import paramiko
+import subprocess
 from classes.database_info_rpi import RpiHost, RpiHostTest, SshInfo
 # from classes.database_info_local import RpiHost, RpiHostTest, SshInfo
 
 
-def database_backup(output_file):
+def database_backup_rpi(output_file):
+    print("Creating backup of database...")
+
+    # Identify the Docker container running MySQL
+    container_cmd = subprocess.run(['docker', 'ps', '--filter', 'ancestor=mysql', '--format', '{{.ID}}'],
+                                   capture_output=True, text=True, check=True)
+    container_id = container_cmd.stdout.strip()
+
+    if not container_id:
+        print("MySQL Docker container not found.")
+        print("DB backup aborted.")
+        return
+
+    # Construct the mysqldump command to run inside the Docker container
+    print("Creating backup file ...")
+    mysqldump_cmd = [
+        'docker', 'exec', container_id,
+        'mysqldump', f'--user={RpiHost.user}', f'--password={RpiHost.pwd}', RpiHost.database
+    ]
+
+    # Save the output to a file locally
+    with open(output_file, 'w') as file:
+        sql_file = subprocess.run(mysqldump_cmd, stdout=file, text=True, check=True)
+
+    print("Backup completed.")
+
+    return
+
+
+def database_backup_local(output_file):
     print("\n-- DB BACKUP FUNCTION INITIATED --")
 
     # Create an SSH client
@@ -25,7 +55,7 @@ def database_backup(output_file):
             print("DB backup aborted.")
             return
 
-        # Construct the mysqldump command to be run inside the Docker container
+        # Construct the mysqldump command to run inside the Docker container
         print("Creating backup file ...")
         mysqldump_command = (
             f'docker exec {container_id} '
@@ -51,3 +81,5 @@ def database_backup(output_file):
     finally:
         # Close the SSH connection
         ssh_client.close()
+
+    return

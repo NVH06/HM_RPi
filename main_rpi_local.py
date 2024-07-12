@@ -1,7 +1,7 @@
 from functions.id_scrape import get_ids
 from functions.data_scrape import get_data
 from functions.mysql_insert import import_data
-from functions.backup_db import database_backup
+from functions.backup_db import database_backup_rpi
 from functions.log import log_scrape, log_tg, log_timer, start_tg
 # from functions.gd_upload import upload_gd
 from classes.types import TransType
@@ -55,7 +55,7 @@ if __name__ == "__main__":
         import_data(location_table, financial_table, property_table, RpiHost)
 
         # BACKUP DATABASE
-        database_backup(db_backup_file)
+        database_backup_rpi(db_backup_file)
 
         # LOG FILE
         log_scrape(log_file, RpiHost, zip_codes, pre_filter_count, total_count, sale_count, rent_count, med_buy, med_rent)
