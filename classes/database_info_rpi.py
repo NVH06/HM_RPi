@@ -4,7 +4,7 @@ import os
 class RpiHost:
     host = os.environ["HOST"]
     database = "hm"
-    user = "insertuser"
+    user = "botuser"
     pwd = os.environ["MYSQL_PWD"]
     tables = ["financial", "location", "property"]
 
@@ -12,7 +12,7 @@ class RpiHost:
 class RpiHostTest:
     host = os.environ["HOST"]
     database = "hm_test"
-    user = "insertuser"
+    user = "botuser"
     pwd = os.environ["MYSQL_PWD"]
     tables = ["financial", "location", "property"]
 
