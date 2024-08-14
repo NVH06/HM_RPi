@@ -8,7 +8,7 @@ def database_backup_rpi(output_file):
     print("Creating backup of database...")
 
     # Identify the Docker container running MySQL
-    container_cmd = subprocess.run(['docker', 'ps', '--filter', 'ancestor=mysql', '--format', '{{.ID}}'],
+    container_cmd = subprocess.run(['docker', 'ps', '--filter', 'ancestor=mysql/mysql-server:5.7', '--format', '{{.ID}}'],
                                    capture_output=True, text=True, check=True)
     container_id = container_cmd.stdout.strip()
 
