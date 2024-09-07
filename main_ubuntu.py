@@ -52,13 +52,13 @@ if __name__ == "__main__":
         med_rent = scrape['med_rent']
 
         # MYSQL INSERT
-        import_data(location_table, financial_table, property_table, RpiHost)
+        import_data(location_table, financial_table, property_table, RpiHostTest)
 
         # BACKUP DATABASE
         database_backup_rpi(db_backup_file)
 
         # LOG FILE
-        log_scrape(log_file, RpiHost, zip_codes, pre_filter_count, total_count, sale_count, rent_count, med_buy, med_rent)
+        log_scrape(log_file, RpiHostTest, zip_codes, pre_filter_count, total_count, sale_count, rent_count, med_buy, med_rent)
 
         # TIMER
         execution_time = log_timer(start)

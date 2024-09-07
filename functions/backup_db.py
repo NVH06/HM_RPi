@@ -21,7 +21,7 @@ def database_backup_rpi(output_file):
     print("Creating backup file ...")
     mysqldump_cmd = [
         'docker', 'exec', container_id,
-        'mysqldump', f'--user={RpiHost.user}', f'--password={RpiHost.pwd}', RpiHost.database
+        'mysqldump', f'--user={RpiHostTest.user}', f'--password={RpiHostTest.pwd}', RpiHostTest.database
     ]
 
     # Save the output to a file locally
